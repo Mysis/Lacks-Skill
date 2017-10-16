@@ -1,0 +1,33 @@
+{
+  "menu_id" : "ls_od_menu",
+  "parent_menu_id" : "ls_main_menu",
+  "title" : "ls_od_menu_title",
+  "description" : "ls_od_menu_desc",
+  "back_callback" : "LacksSkillSave",
+  "items" : [
+    {
+      "type" : "toggle",
+      "id" : "ls_od_req_inspire_aced",
+      "title" : "ls_req_inspire_aced",
+      "description" : "ls_req_inspire_aced_desc",
+      "callback" : "LacksSkillODReqInspireAced",
+      "value" : "od_req_inspire"
+    },
+    {
+      "type" : "toggle",
+      "id" : "ls_od_req_nine_lives_aced",
+      "title" : "ls_req_nine_lives_aced",
+      "description" : "ls_req_nine_lives_aced_desc",
+      "callback" : "LacksSkillODReqNineLivesAced",
+      "value" : "od_req_nine_lives"
+    },
+    {
+      "type" : "toggle",
+      "id" : "ls_od_req_swan_song_aced",
+      "title" : "ls_req_swan_song_aced",
+      "description" : "ls_req_swan_song_aced_desc",
+      "callback" : "LacksSkillODReqSwanSongAced",
+      "value" : "od_req_swan_song"
+    }
+  ]
+}

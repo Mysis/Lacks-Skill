@@ -1,0 +1,18 @@
+{
+  "ls_options_menu_title" : "Lacks Skill",
+  "ls_options_menu_desc" : "Kicks players who are known not to have certain skills",
+  
+  "ls_od_menu_title" : "One Down requirements",
+  "ls_od_menu_desc" : "Set skill requirements for One Down",
+  "ls_cs_menu_title" : "Crime Spree requirements",
+  "ls_cs_menu_desc" : "Set skill requirements for Crime Spree",
+
+  "ls_req_inspire_aced" : "Inspire aced",
+  "ls_req_inspire_aced_desc" : "Require Inspire aced",
+  "ls_req_nine_lives_aced" : "Nine Lives aced",
+  "ls_req_nine_lives_aced_desc" : "Require Nine Lives aced",
+  "ls_req_swan_song_aced" : "Swan Song aced",
+  "ls_req_swan_song_aced_desc" : "Require Swan Song aced",
+  
+  "ls_kick_reason" : " was kicked for not having the following skills: "
+}

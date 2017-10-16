@@ -1,0 +1,8 @@
+{
+  "menu_id" : "ls_main_menu",
+  "parent_menu_id" : "blt_options",
+  "title" : "ls_options_menu_title",
+  "description" : "ls_options_menu_desc",
+  "back_callback" : "LacksSkillSave",
+  "items" : []
+}
