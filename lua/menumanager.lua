@@ -3,6 +3,7 @@ LacksSkill._path = ModPath
 LacksSkill._data_path = SavePath .. "lacks_skill.txt"
 
 LacksSkill.settings = {
+  show_disclaimer = true,
   broadcast_info = true,
   od_req_inspire = false,
   od_req_nine_lives = false,
@@ -66,6 +67,13 @@ Hooks:Add('MenuManagerInitialize', 'MenuManagerInitialize_LacksSkill', function(
     end
     MenuCallbackHandler.LacksSkillCSReqSwanSongAced = function(this, item)
       LacksSkill.settings.cs_req_swan_song = Utils:ToggleItemToBoolean(item)
+    end
+    
+    MenuCallbackHandler.LacksSkillChangedFocus = function(node, focus)
+      if LacksSkill.settings.show_disclaimer then
+        QuickMenu:new(managers.localization:text("ls_disclaimer_title"), managers.localization:text("ls_disclaimer_content"), {}, true)
+        LacksSkill.settings.show_disclaimer = false
+      end
     end
 
     MenuCallbackHandler.LacksSkillSave = function(this, item)

@@ -23,6 +23,9 @@ function LacksSkill:check_kick(peer_id)
     if all_skills[14] < 12 then
       peer_skills.swan_song = false
     end
+  elseif all_skills[14] == 14 then
+    peer_skills.nine_lives = false
+    peer_skills.swan_song = false
   end
   
   local kick_reason = {}
