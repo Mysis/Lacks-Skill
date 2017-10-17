@@ -13,19 +13,18 @@ function LacksSkill:check_kick(peer_id)
   local peer = managers.network:session():peer(peer_id)
   local kick = false
 
-  local peer_skills = {inspire = true, nine_lives = true, swan_song = true}
+  local peer_skills = {inspire = true, nine_lives = true, swan_song = true, nine_and_swan = true}
   local all_skills = LacksSkill:raw_skills_to_table(peer:skills())
   if all_skills[1] < 28 then
     peer_skills.inspire = false
   end
-  if all_skills[14] < 4 then
-    peer_skills.nine_lives = false
-    if all_skills[14] < 12 then
-      peer_skills.swan_song = false
-    end
-  elseif all_skills[14] == 14 then
-    peer_skills.nine_lives = false
+  if all_skills[14] < 12 then
     peer_skills.swan_song = false
+    if all_skills[14] < 4 then
+      peer_skills.nine_lives = false
+    end
+  else if all_skills[14] == 14 then
+    peer_skills.nine_and_swan = false
   end
   
   local kick_reason = {}
@@ -35,26 +34,38 @@ function LacksSkill:check_kick(peer_id)
       kick = true
       table.insert(kick_reason, managers.localization:text("menu_inspire_beta"))
     end
-    if LacksSkill.settings.od_req_nine_lives and not peer_skills.nine_lives then
+    if LacksSkill.settings.od_req_nine_lives and LacksSkill.settings.od_req_swan_song and not peer_skills.nine_and_swan then
       kick = true
       table.insert(kick_reason, managers.localization:text("menu_nine_lives_beta"))
-    end
-    if LacksSkill.settings.od_req_swan_song and not peer_skills.swan_song then
-      kick = true
       table.insert(kick_reason, managers.localization:text("menu_perseverance_beta"))
+    else
+      if LacksSkill.settings.od_req_nine_lives and not peer_skills.nine_lives then
+        kick = true
+        table.insert(kick_reason, managers.localization:text("menu_nine_lives_beta"))
+      end
+      if LacksSkill.settings.od_req_swan_song and not peer_skills.swan_song then
+        kick = true
+        table.insert(kick_reason, managers.localization:text("menu_perseverance_beta"))
+      end
     end
   elseif gamemode == "crime_spree" then
     if LacksSkill.settings.cs_req_inspire and not peer_skills.inspire then
       kick = true
       table.insert(kick_reason, managers.localization:text("menu_inspire_beta"))
     end
-    if LacksSkill.settings.cs_req_nine_lives and not peer_skills.nine_lives then
+    if LacksSkill.settings.cs_req_nine_lives and LacksSkill.settings.cs_req_swan_song and not peer_skills.nine_and_swan then
       kick = true
       table.insert(kick_reason, managers.localization:text("menu_nine_lives_beta"))
-    end
-    if LacksSkill.settings.cs_req_swan_song and not peer_skills.swan_song then
-      kick = true
       table.insert(kick_reason, managers.localization:text("menu_perseverance_beta"))
+    else
+      if LacksSkill.settings.cs_req_nine_lives and not peer_skills.nine_lives then
+        kick = true
+        table.insert(kick_reason, managers.localization:text("menu_nine_lives_beta"))
+      end
+      if LacksSkill.settings.cs_req_swan_song and not peer_skills.swan_song then
+        kick = true
+        table.insert(kick_reason, managers.localization:text("menu_perseverance_beta"))
+      end
     end
   end
   
