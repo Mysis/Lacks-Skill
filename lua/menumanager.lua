@@ -3,6 +3,7 @@ LacksSkill._path = ModPath
 LacksSkill._data_path = SavePath .. "lacks_skill.txt"
 
 LacksSkill.settings = {
+  broadcast_info = true,
   od_req_inspire = false,
   od_req_nine_lives = false,
   od_req_swan_song = false,
@@ -42,6 +43,11 @@ Hooks:Add('LocalizationManagerPostInit', 'LocalizationManagerPostInit_LacksSkill
   end)
 
 Hooks:Add('MenuManagerInitialize', 'MenuManagerInitialize_LacksSkill', function(menu_manager)
+    
+    MenuCallbackHandler.LacksSkillBroadcastInfo = function(this, item)
+      LacksSkill.settings.broadcast_info = Utils:ToggleItemToBoolean(item)
+    end
+    
     MenuCallbackHandler.LacksSkillODReqInspireAced = function(this, item)
       LacksSkill.settings.od_req_inspire = Utils:ToggleItemToBoolean(item)
     end
@@ -73,8 +79,15 @@ Hooks:Add('MenuManagerInitialize', 'MenuManagerInitialize_LacksSkill', function(
     MenuHelper:LoadFromJsonFile(LacksSkill._path .. 'menu/crimespree.json', LacksSkill, LacksSkill.settings)
   end)
 
-function LacksSkill:system_message(message, colorstring)
+function LacksSkill:chat_message(message, colorstring)
   managers.chat:_receive_message(1, "[LS]", message, Color(colorstring))
+  if Network:is_server() and LacksSkill.settings.broadcast_info then
+    for key, peer in pairs(managers.network:session():peers()) do
+      if peer then
+        peer:send("send_chat_message", ChatManager.GAME, "[LS]: " .. message)
+      end
+    end
+  end
 end
 
 function LacksSkill:raw_skills_to_table(skillstring)

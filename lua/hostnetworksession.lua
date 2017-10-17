@@ -26,8 +26,7 @@ function LacksSkill:check_kick(peer_id)
   end
   
   local kick_reason = {}
-  --local gamemode = LacksSkill:get_gamemode()
-  local gamemode = "sm_wish"
+  local gamemode = LacksSkill:get_gamemode()
   if gamemode == "sm_wish" then
     if LacksSkill.settings.od_req_inspire and not peer_skills.inspire then
       kick = true
@@ -72,7 +71,7 @@ function LacksSkill:kick_peer(peer_id, kick_reason)
     end
     session:send_to_peers("kick_peer", peer:id(), 0)
     session:on_peer_kicked(peer, peer:id(), 0)
-    LacksSkill:system_message(kick_message, "ff0000")
+    LacksSkill:chat_message(kick_message, "ff0000")
     LacksSkill.kicked_by_ls = false
   end
 end

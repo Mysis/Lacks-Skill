@@ -4,5 +4,18 @@
   "title" : "ls_options_menu_title",
   "description" : "ls_options_menu_desc",
   "back_callback" : "LacksSkillSave",
-  "items" : []
+  "items" : [
+    {
+      "type" : "toggle",
+      "id" : "ls_broadcast_info",
+      "title" : "ls_broadcast_info",
+      "description" : "ls_broadcast_info_desc",
+      "callback" : "LacksSkillBroadcastInfo",
+      "value" : "broadcast_info"
+    },
+    {
+      "type" : "divider",
+      "size" : 16
+    }
+  ]
 }

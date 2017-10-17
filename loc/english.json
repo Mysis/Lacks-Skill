@@ -2,6 +2,9 @@
   "ls_options_menu_title" : "Lacks Skill",
   "ls_options_menu_desc" : "Kicks players who are known not to have certain skills",
   
+  "ls_broadcast_info" : "Broadcast to peers",
+  "ls_broadcast_info_desc" : "Broadcast kick information to other players",
+  
   "ls_od_menu_title" : "One Down requirements",
   "ls_od_menu_desc" : "Set skill requirements for One Down",
   "ls_cs_menu_title" : "Crime Spree requirements",
