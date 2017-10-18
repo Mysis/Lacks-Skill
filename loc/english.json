@@ -3,7 +3,7 @@
   "ls_options_menu_desc" : "Kicks players who are known not to have certain skills",
   
   "ls_disclaimer_title" : "DISCLAIMER",
-  "ls_disclaimer_content" : "This mod is not 100% accurate. Because of the way the game sends skill data to the host, it is impossible to know exactly which skills a player possesses. This mod will never wrongfully kick a player, but it will not always kick players that don't have the selected skills.",
+  "ls_disclaimer_content" : "This mod is not 100% accurate. Because of the way the game sends skill data to the host, it is impossible to know exactly which skills a player possesses. This mod will never wrongfully kick a player, but it will not always kick players that don't have the required skills.",
   
   "ls_broadcast_info" : "Broadcast to peers",
   "ls_broadcast_info_desc" : "Broadcast kick information to other players",
@@ -20,5 +20,5 @@
   "ls_req_swan_song_aced" : "Swan Song aced",
   "ls_req_swan_song_aced_desc" : "Require Swan Song aced",
   
-  "ls_kick_reason" : " was kicked for not having the following skills: "
+  "ls_kick_reason" : " was kicked for attempting to join the game without the following skills: "
 }

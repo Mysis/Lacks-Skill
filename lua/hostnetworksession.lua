@@ -23,7 +23,7 @@ function LacksSkill:check_kick(peer_id)
     if all_skills[14] < 4 then
       peer_skills.nine_lives = false
     end
-  else if all_skills[14] == 14 then
+  elseif all_skills[14] == 14 then
     peer_skills.nine_and_swan = false
   end
   
