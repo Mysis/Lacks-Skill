@@ -5,13 +5,21 @@ LacksSkill._data_path = SavePath .. "lacks_skill.txt"
 LacksSkill.settings = {
   show_disclaimer = true,
   broadcast_info = true,
+  
+  od_enabled = false,
   od_req_inspire = false,
   od_req_nine_lives = false,
   od_req_swan_song = false,
+  od_stealth_kick = 1,
+  
+  cs_enabled = false,
   cs_req_inspire = false,
   cs_req_nine_lives = false,
-  cs_req_swan_song = false
+  cs_req_swan_song = false,
+  cs_stealth_kick = 1
 }
+LacksSkill.previous_dropin_option = nil
+LacksSkill.ignore_kick = false
 LacksSkill.kicked_by_ls = false
 
 function LacksSkill:Load()
@@ -49,6 +57,9 @@ Hooks:Add('MenuManagerInitialize', 'MenuManagerInitialize_LacksSkill', function(
       LacksSkill.settings.broadcast_info = Utils:ToggleItemToBoolean(item)
     end
     
+    MenuCallbackHandler.LacksSkillODEnabled = function(this, item)
+      LacksSkill.settings.od_enabled = Utils:ToggleItemToBoolean(item)
+    end
     MenuCallbackHandler.LacksSkillODReqInspireAced = function(this, item)
       LacksSkill.settings.od_req_inspire = Utils:ToggleItemToBoolean(item)
     end
@@ -58,7 +69,13 @@ Hooks:Add('MenuManagerInitialize', 'MenuManagerInitialize_LacksSkill', function(
     MenuCallbackHandler.LacksSkillODReqSwanSongAced = function(this, item)
       LacksSkill.settings.od_req_swan_song = Utils:ToggleItemToBoolean(item)
     end
+    MenuCallbackHandler.LacksSkillODStealthKick = function(this, item)
+      LacksSkill.settings.od_stealth_kick = item:value()
+    end
 
+    MenuCallbackHandler.LacksSkillCSEnabled = function(this, item)
+      LacksSkill.settings.cs_enabled = Utils:ToggleItemToBoolean(item)
+    end
     MenuCallbackHandler.LacksSkillCSReqInspireAced = function(this, item)
       LacksSkill.settings.cs_req_inspire = Utils:ToggleItemToBoolean(item)
     end
@@ -67,6 +84,9 @@ Hooks:Add('MenuManagerInitialize', 'MenuManagerInitialize_LacksSkill', function(
     end
     MenuCallbackHandler.LacksSkillCSReqSwanSongAced = function(this, item)
       LacksSkill.settings.cs_req_swan_song = Utils:ToggleItemToBoolean(item)
+    end
+    MenuCallbackHandler.LacksSkillCSStealthKick = function(this, item)
+      LacksSkill.settings.cs_stealth_kick = item:value()
     end
     
     MenuCallbackHandler.LacksSkillChangedFocus = function(node, focus)
@@ -87,12 +107,14 @@ Hooks:Add('MenuManagerInitialize', 'MenuManagerInitialize_LacksSkill', function(
     MenuHelper:LoadFromJsonFile(LacksSkill._path .. 'menu/crimespree.json', LacksSkill, LacksSkill.settings)
   end)
 
-function LacksSkill:chat_message(message, colorstring)
+function LacksSkill:chat_message(message, colorstring, private)
   managers.chat:_receive_message(1, "[LS]", message, Color(colorstring))
-  if Network:is_server() and LacksSkill.settings.broadcast_info then
-    for key, peer in pairs(managers.network:session():peers()) do
-      if peer then
-        peer:send("send_chat_message", ChatManager.GAME, "[LS]: " .. message)
+  if not private then
+    if Network:is_server() and LacksSkill.settings.broadcast_info then
+      for key, peer in pairs(managers.network:session():peers()) do
+        if peer then
+          peer:send("send_chat_message", ChatManager.GAME, "[LS]: " .. message)
+        end
       end
     end
   end
@@ -124,16 +146,24 @@ function LacksSkill:skills_to_string(skilltable)
 end
 
 function LacksSkill:raw_skills_to_string(skillstring)
-    result = LacksSkill:skills_to_string(LacksSkill:raw_skills_to_table(skillstring))
-    return result
+  result = LacksSkill:skills_to_string(LacksSkill:raw_skills_to_table(skillstring))
+  return result
 end
 
-function LacksSkill:get_gamemode()
-    if Global.game_settings.gamemode == GamemodeCrimeSpree.id then
-        return "crime_spree"
-    else
-        return Global.game_settings.difficulty
-    end
+function LacksSkill:gamemode()
+  if Global.game_settings.gamemode == GamemodeCrimeSpree.id then
+      return "crime_spree"
+  else
+      return Global.game_settings.difficulty
+  end
 end
 
+function LacksSkill:enabled()
+  local gamemode = LacksSkill:gamemode()
+  if (gamemode == "sm_wish" and LacksSkill.settings.od_enabled) or (gamemode == "crime_spree" and LacksSkill.settings.cs_enabled) then
+    return true
+  else
+    return false
+  end
+end
 

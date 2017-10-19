@@ -7,8 +7,19 @@
   "items" : [
     {
       "type" : "toggle",
+      "id" : "ls_od_enabled",
+      "title" : "ls_enabled_title",
+      "callback" : "LacksSkillODEnabled",
+      "value" : "od_enabled"
+    },
+    {
+      "type" : "divider",
+      "size" : 16
+    },
+    {
+      "type" : "toggle",
       "id" : "ls_od_req_inspire_aced",
-      "title" : "ls_req_inspire_aced",
+      "title" : "ls_req_inspire_aced_title",
       "description" : "ls_req_inspire_aced_desc",
       "callback" : "LacksSkillODReqInspireAced",
       "value" : "od_req_inspire"
@@ -16,7 +27,7 @@
     {
       "type" : "toggle",
       "id" : "ls_od_req_nine_lives_aced",
-      "title" : "ls_req_nine_lives_aced",
+      "title" : "ls_req_nine_lives_aced_title",
       "description" : "ls_req_nine_lives_aced_desc",
       "callback" : "LacksSkillODReqNineLivesAced",
       "value" : "od_req_nine_lives"
@@ -24,10 +35,27 @@
     {
       "type" : "toggle",
       "id" : "ls_od_req_swan_song_aced",
-      "title" : "ls_req_swan_song_aced",
+      "title" : "ls_req_swan_song_aced_title",
       "description" : "ls_req_swan_song_aced_desc",
       "callback" : "LacksSkillODReqSwanSongAced",
       "value" : "od_req_swan_song"
+    },
+    {
+      "type" : "divider",
+      "size" : 16
+    },
+    {
+      "type" : "multiple_choice",
+      "id" : "ls_od_stealth_kick",
+      "title" : "ls_stealth_kick_title",
+      "description" : "ls_stealth_kick_desc",
+      "callback" : "LacksSkillODStealthKick",
+      "items" : [
+        "ls_stealth_kick_option_1",
+        "ls_stealth_kick_option_2",
+        "ls_stealth_kick_option_3"
+      ],
+      "value" : "od_stealth_kick"
     }
   ]
 }
