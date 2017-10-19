@@ -108,7 +108,7 @@ Hooks:Add('MenuManagerInitialize', 'MenuManagerInitialize_LacksSkill', function(
   end)
 
 function LacksSkill:chat_message(message, colorstring, private)
-  managers.chat:_receive_message(1, "[LS]", message, Color(colorstring))
+  managers.chat:_receive_message(1, "[LS]", message, Color(colorstring), private and "stealth_icon" or "loud_icon")
   if not private then
     if Network:is_server() and LacksSkill.settings.broadcast_info then
       for key, peer in pairs(managers.network:session():peers()) do
