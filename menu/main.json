@@ -9,10 +9,18 @@
     {
       "type" : "toggle",
       "id" : "ls_broadcast_info",
-      "title" : "ls_broadcast_info",
+      "title" : "ls_broadcast_info_title",
       "description" : "ls_broadcast_info_desc",
       "callback" : "LacksSkillBroadcastInfo",
       "value" : "broadcast_info"
+    },
+    {
+      "type" : "toggle",
+      "id" : "ls_broadcast_warning",
+      "title" : "ls_broadcast_warning_title",
+      "description" : "ls_broadcast_warning_desc",
+      "callback" : "LacksSkillBroadcastWarning",
+      "value" : "broadcast_warning"
     },
     {
       "type" : "divider",

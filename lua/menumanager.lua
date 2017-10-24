@@ -4,7 +4,9 @@ LacksSkill._data_path = SavePath .. "lacks_skill.txt"
 
 LacksSkill.settings = {
   show_disclaimer = true,
+  
   broadcast_info = true,
+  broadcast_warning = true,
   
   od_enabled = false,
   od_req_inspire = false,
@@ -55,6 +57,9 @@ Hooks:Add('MenuManagerInitialize', 'MenuManagerInitialize_LacksSkill', function(
     
     MenuCallbackHandler.LacksSkillBroadcastInfo = function(this, item)
       LacksSkill.settings.broadcast_info = Utils:ToggleItemToBoolean(item)
+    end
+    MenuCallbackHandler.LacksSkillBroadcastWarning = function(this, item)
+      LacksSkill.settings.broadcast_warning = Utils:ToggleItemToBoolean(item)
     end
     
     MenuCallbackHandler.LacksSkillODEnabled = function(this, item)
@@ -107,8 +112,24 @@ Hooks:Add('MenuManagerInitialize', 'MenuManagerInitialize_LacksSkill', function(
     MenuHelper:LoadFromJsonFile(LacksSkill._path .. 'menu/crimespree.json', LacksSkill, LacksSkill.settings)
   end)
 
-function LacksSkill:chat_message(message, colorstring, private)
-  managers.chat:_receive_message(1, "[LS]", message, Color(colorstring), private and "stealth_icon" or "loud_icon")
+function LacksSkill:chat_message(message, infotype, private)
+  log(infotype)
+  local color
+  log(tostring(private))
+  if infotype == "kick" then
+    log("kick")
+    if private == nil then private = not LacksSkill.settings.broadcast_info end
+    color = "ff0000"
+  elseif infotype == "warning" then
+    if private == nil then private = not LacksSkill.settings.broadcast_warning end
+    log("warning")
+    color = "ff7f00"
+  else
+    if private == nil then private = true end
+    color = "ff0000"
+  end
+  log(tostring(private))
+  managers.chat:_receive_message(1, "[LS]", message, Color(color), private and "stealth_icon" or "loud_icon")
   if not private then
     if Network:is_server() and LacksSkill.settings.broadcast_info then
       for key, peer in pairs(managers.network:session():peers()) do

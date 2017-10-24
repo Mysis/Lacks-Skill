@@ -5,8 +5,10 @@
   "ls_disclaimer_title" : "DISCLAIMER",
   "ls_disclaimer_content" : "This mod is not 100% accurate. Because of the way the game sends skill data to the host, it is impossible to know exactly which skills a player possesses. This mod will never wrongfully kick a player, but it will not always kick players that don't have the required skills.",
   
-  "ls_broadcast_info" : "Broadcast to peers",
+  "ls_broadcast_info_title" : "Broadcast kick info to peers",
   "ls_broadcast_info_desc" : "Broadcast kick information to other players",
+  "ls_broadcast_warning_title" : "Broadcast warnings to peers",
+  "ls_broadcast_warning_desc" : "Broadcast skill warnings to other players",
   
   "ls_od_menu_title" : "One Down requirements",
   "ls_od_menu_desc" : "Set skill requirements for One Down",

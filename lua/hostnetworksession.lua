@@ -46,7 +46,7 @@ Hooks:PreHook(HostNetworkSession, "_add_waiting", "addwaitingprehook", function(
     if LacksSkill:enabled() then
       local kick, kick_reason = LacksSkill:check_kick(peer:id())
       if kick then
-        LacksSkill:chat_message(peer:name() .. managers.localization:text("ls_warning") .. LacksSkill:kick_reason_to_string(kick_reason), "ff0000", true)
+        LacksSkill:chat_message(peer:name() .. managers.localization:text("ls_warning") .. LacksSkill:kick_reason_to_string(kick_reason), "warning")
       end
     end
   end)
@@ -122,7 +122,7 @@ function LacksSkill:kick_peer(peer_id, kick_reason)
     local kick_message = peer:name() .. managers.localization:text("ls_kick_reason") .. LacksSkill:kick_reason_to_string(kick_reason)
     session:send_to_peers("kick_peer", peer:id(), 0)
     session:on_peer_kicked(peer, peer:id(), 0)
-    LacksSkill:chat_message(kick_message, "ff0000")
+    LacksSkill:chat_message(kick_message, "kick")
     LacksSkill.kicked_by_ls = false
   end
 end
